@@ -3,8 +3,11 @@
 import os
 import collections
 
-def machine_info(machine_name="", sortby=""):
-	
+def machine_info(machine_name="", sortby="CPU"):
+	'''
+	This function will run ps aux externally, read in the output, 
+	and store the resulting data into a default dictionary collection.
+	'''
 	# case for when a machine name is not given,
 	# use the current machine name 
 
@@ -13,7 +16,9 @@ def machine_info(machine_name="", sortby=""):
 	request_data = os.popen('ps aux')
 	data = request_data.read()
 	for line in data.splitlines()[1:]:
-		
+	
+		# if the specified sorting field is 0, add it to the list
+
 		line = line.split()
 
 		USER    = line[0]
@@ -22,6 +27,11 @@ def machine_info(machine_name="", sortby=""):
 		MEM     = line[3]
 		STAT    = line[7]
 		COMMAND = line[10]
+	
+		# if the prioritized statistic is zero, skip it
+		if CPU != '0.0':
+			print(CPU)
+			continue
 
 		data_dict[COMMAND]["CPU"] = CPU
 		data_dict[COMMAND]["MEM"] = MEM
