@@ -3,8 +3,21 @@
 import os
 import collections
 
-def machine_info(machine_name="", sortby=""):
-	
+def machine_info(machine_name="", sortby="CPU"):
+	'''
+	This function will run ps aux externally, read in the output, 
+	and store the resulting data into a default dictionary collection.
+	---------------------------------------------------------------------
+	Inputs:
+		machine_name     name of machine to check. 
+							- default is current machine
+
+		sortby           parameter to prioritize when sorting. 
+							- default is CPU
+	Output:
+		data dict        collection dictionary holding machine data 
+	---------------------------------------------------------------------
+	'''
 	# case for when a machine name is not given,
 	# use the current machine name 
 
@@ -13,7 +26,9 @@ def machine_info(machine_name="", sortby=""):
 	request_data = os.popen('ps aux')
 	data = request_data.read()
 	for line in data.splitlines()[1:]:
-		
+	
+		# if the specified sorting field is 0, add it to the list
+
 		line = line.split()
 
 		USER    = line[0]
@@ -22,14 +37,28 @@ def machine_info(machine_name="", sortby=""):
 		MEM     = line[3]
 		STAT    = line[7]
 		COMMAND = line[10]
+	
+		# if the prioritized statistic is zero, skip it
+		# this will keep the data being stored only relavent to what the user wants
+		if sortby == 'CPU' and CPU == '0.0':
+			continue
+		
+		elif sortby == 'MEM' and MEM =='0.0':
+			continue
 
 		data_dict[COMMAND]["CPU"] = CPU
 		data_dict[COMMAND]["MEM"] = MEM
 		data_dict[COMMAND]["PID"] = PID
 		data_dict[COMMAND]["STAT"] = STAT
 
-		
+	return data_dict
 	
 	
 if __name__ == "__main__":
-	machine_info()
+	# testing out the function	
+	data_dict = machine_info()
+	
+	for data in data_dict:
+		print(f'process: {data}' )
+		print(f'cpu usage: {data_dict[data]["CPU"]}')
+		print(f'mem usage: {data_dict[data]["MEM"]}\n')
