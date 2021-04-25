@@ -22,7 +22,6 @@ def cpu_mem_info(machine_name="", sortby="CPU"):
 	# use the current machine name 
 	
 	#machine_name = 'remote304.helios.nd.edu'
-	#data_dict = collections.defaultdict(dict)
 	#if machine_name !="":
 	#	username = os.environ['USER']
 	#	full_remote = username +'@'+ machine_name
@@ -30,6 +29,7 @@ def cpu_mem_info(machine_name="", sortby="CPU"):
 	#else:
 	#	request_data = os.popen('ps aux')
 
+	data_dict = collections.defaultdict(dict)
 
 	request_data = os.popen('ps aux')
 	
