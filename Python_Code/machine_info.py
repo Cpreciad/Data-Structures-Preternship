@@ -3,7 +3,7 @@
 import os
 import collections
 
-def machine_info(machine_name="", sortby="CPU"):
+def cpu_mem_info(machine_name="", sortby="CPU"):
 	'''
 	This function will run ps aux externally, read in the output, 
 	and store the resulting data into a default dictionary collection.
@@ -20,10 +20,19 @@ def machine_info(machine_name="", sortby="CPU"):
 	'''
 	# case for when a machine name is not given,
 	# use the current machine name 
+	
+	#machine_name = 'remote304.helios.nd.edu'
+	#data_dict = collections.defaultdict(dict)
+	#if machine_name !="":
+	#	username = os.environ['USER']
+	#	full_remote = username +'@'+ machine_name
+	#	request_data = os.popen(f'ssh {full_remote} ps aux')
+	#else:
+	#	request_data = os.popen('ps aux')
 
-	data_dict = collections.defaultdict(dict)
 
 	request_data = os.popen('ps aux')
+	
 	data = request_data.read()
 	for line in data.splitlines()[1:]:
 	
@@ -56,7 +65,7 @@ def machine_info(machine_name="", sortby="CPU"):
 	
 if __name__ == "__main__":
 	# testing out the function	
-	data_dict = machine_info()
+	data_dict = cpu_mem_info()
 	
 	for data in data_dict:
 		print(f'process: {data}' )
