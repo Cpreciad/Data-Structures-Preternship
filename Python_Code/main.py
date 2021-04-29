@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
 	if not args.C:
 		print('Displaying CPU info...')
-		print('----------------------')
+		print_info.print_separator(cpu_data.keys(), '-')
 		print_info.print_processes(cpu_data)
 		print_info.print_separator(cpu_data.keys(), '=')
 		print_info.print_fields(cpu_data);
