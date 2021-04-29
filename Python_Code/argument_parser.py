@@ -24,8 +24,14 @@ class ArgumentParser:
 		parser.add_argument('-R', help='Do not include memory usage. Default false.', action='store_true')
 		parser.add_argument('-S', help='Field to sort by (default: CPU usage)')
 
-		# Parse arguments and return as dictionary
+		# Parse arguments and return as mamespace object
 		args = parser.parse_args()
-		return vars(args)
+		self.verify_args(args)
+		return args
 
+	def verify_args(self, args):
+		''' Checks for errors with user argument specifications '''
+
+		if args.H and args.C and args.R:
+			sys.exit("Cannot omit all 3 options: hard drive usage, CPU usage, memory usage")
 

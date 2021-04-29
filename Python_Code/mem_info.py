@@ -9,7 +9,13 @@ DESIRED_FIELDS = ('MemTotal', 'MemFree', 'MemAvailable',
 									'VmallocTotal', 'VmallocUsed', 'VmallocChunk')
 
 def memory_info():
-		''' Uses the /proc/meminfo file to report information about the current Linux machine '''
+		''' 
+		Uses the /proc/meminfo file to report information about the current Linux machine.
+		
+		Opens the /proc/meminfo file, which contains information about the file system: 
+		https://man7.org/linux/man-pages/man5/proc.5.html. Selected fields provide a
+		snapshot of the current memory state of the Linux machine.
+		'''
 
 		mem_info = collections.defaultdict()
 
