@@ -21,7 +21,7 @@ if __name__ == "__main__":
 	args = argp.get_args_from_user()
 
 	# Obtain needed data
-	hard_drive_data = hard_drive_info.hard_drive_info()
+	hard_drive_data = hard_drive_info.hard_drive_info(".")
 	cpu_data = machine_info.cpu_mem_info()
 	memory_data = mem_info.memory_info()
 
