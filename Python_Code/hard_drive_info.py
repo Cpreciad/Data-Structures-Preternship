@@ -32,7 +32,7 @@ def hard_drive_info(path=os.getcwd()):
 
 		# If entry is a directory, it will enter it recursively
 		elif (os.path.isdir(currPath)):
-			data_dict.update(hard_drive_info(machine_name, currPath))
+			data_dict.update(hard_drive_info(currPath))
 
 	return data_dict
 
