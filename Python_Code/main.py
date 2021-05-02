@@ -2,6 +2,7 @@
 
 # Imports
 import argument_parser
+import directory_output
 import hard_drive_info
 import machine_info
 import mem_info
@@ -51,4 +52,14 @@ if __name__ == "__main__":
 		  print(f"Percent of swap memory free: {memory_data['SwapPercentFree']:0.2f} %")	
 		  print('\n')
 
+	# Output directory depending on flag
+	if args.d:
+		names_to_datadicts = {}
+		if not args.H:
+			names_to_datadicts['Hard_Drive_Info'] = hard_drive_data
+		if not args.C:
+			names_to_datadicts['CPU_Info'] = cpu_data
+		if not args.M:
+			names_to_datadicts['Memory_Info'] = memory_data
 
+		directory_output.generate_directory(args.d, names_to_datadicts)
