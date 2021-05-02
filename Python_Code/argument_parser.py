@@ -18,11 +18,11 @@ class ArgumentParser:
 																		epilog= 'For more information, see: https://yld.me/PUz')
 
 		# Optional Arguments
-		parser.add_argument('-m', help='Which machine to check (default: current machine)')
 		parser.add_argument('-H', help='Do not include hard drive usage. Default false.', action='store_true')
 		parser.add_argument('-C', help='Do not include CPU usage. Default false.', action='store_true')
-		parser.add_argument('-R', help='Do not include memory usage. Default false.', action='store_true')
-		parser.add_argument('-S', help='Field to sort by (default: CPU usage)')
+		parser.add_argument('-M', help='Do not include memory usage. Default false.', action='store_true')
+		parser.add_argument('-d', help='Store in a directory. Usage: {-d directory}')
+		parser.add_argument('-s', help='Do not print out the information. Default false', action='store_true')
 
 		# Parse arguments and return as mamespace object
 		args = parser.parse_args()
@@ -32,6 +32,6 @@ class ArgumentParser:
 	def verify_args(self, args):
 		''' Checks for errors with user argument specifications '''
 
-		if args.H and args.C and args.R:
+		if args.H and args.C and args.M:
 			sys.exit("Cannot omit all 3 options: hard drive usage, CPU usage, memory usage")
 

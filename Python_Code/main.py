@@ -41,7 +41,7 @@ if __name__ == "__main__":
 		print_info.print_fields(cpu_data);
 		print('\n')
 
-	if not args.R:
+	if not args.M:
 		print('Displaying memory info...')
 		print('-------------------------')
 		print(f"Percent of memory free: {memory_data['MemPercentFree']:0.2f} %")

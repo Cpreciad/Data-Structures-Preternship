@@ -3,23 +3,18 @@
 import os
 import collections
 
-def hard_drive_info(machine_name="", path=os.getcwd()):
+def hard_drive_info(path=os.getcwd()):
 	'''
 	This function will run stat on each file, read in the output, 
 	and store the resulting data into a default dictionary collection.
 	---------------------------------------------------------------------
 	Inputs:
-		machine_name     name of machine to check. 
-							- default is current machine
 		path						 starting path to check.
 							- default is the current working directory
 	Output:
 		data dict        collection dictionary holding machine data 
 	---------------------------------------------------------------------
 	'''
-	# case for when a machine name is not given,
-	# use the current machine name 
-
 	# Initializes dictionary
 	data_dict = collections.defaultdict(dict)
 	for files in os.listdir(path):
@@ -37,7 +32,7 @@ def hard_drive_info(machine_name="", path=os.getcwd()):
 
 		# If entry is a directory, it will enter it recursively
 		elif (os.path.isdir(currPath)):
-			data_dict.update(hard_drive_info(machine_name, currPath))
+			data_dict.update(hard_drive_info(currPath))
 
 	return data_dict
 
