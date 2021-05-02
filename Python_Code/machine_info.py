@@ -3,7 +3,7 @@
 import os
 import collections
 
-def cpu_mem_info(machine_name="", sortby="CPU"):
+def cpu_mem_info(sortby="CPU"):
 	'''
 	This function will run ps aux externally, read in the output, 
 	and store the resulting data into a default dictionary collection.
@@ -18,16 +18,6 @@ def cpu_mem_info(machine_name="", sortby="CPU"):
 		data dict        collection dictionary holding machine data 
 	---------------------------------------------------------------------
 	'''
-	# case for when a machine name is not given,
-	# use the current machine name 
-	
-	#machine_name = 'remote304.helios.nd.edu'
-	#if machine_name !="":
-	#	username = os.environ['USER']
-	#	full_remote = username +'@'+ machine_name
-	#	request_data = os.popen(f'ssh {full_remote} ps aux')
-	#else:
-	#	request_data = os.popen('ps aux')
 
 	data_dict = collections.defaultdict(dict)
 
@@ -49,16 +39,18 @@ def cpu_mem_info(machine_name="", sortby="CPU"):
 	
 		# if the prioritized statistic is zero, skip it
 		# this will keep the data being stored only relavent to what the user wants
-		if sortby == 'CPU' and CPU == '0.0':
+		if MEM == "0.0" and CPU == '0.0':
 			continue
 		
-		elif sortby == 'MEM' and MEM =='0.0':
-			continue
 
 		data_dict[COMMAND]["CPU"] = CPU
 		data_dict[COMMAND]["MEM"] = MEM
 		data_dict[COMMAND]["PID"] = PID
 		data_dict[COMMAND]["STAT"] = STAT
+	
+	# sort the dictionaries with respect to prioritizing cpu
+	data_dict = dict(sorted(data_dict.items(), key = lambda p: float(p[1]["MEM"]), reverse = True))
+	data_dict = dict(sorted(data_dict.items(), key = lambda p: float(p[1]["CPU"]), reverse = True))
 
 	return data_dict
 	
