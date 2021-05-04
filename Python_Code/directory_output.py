@@ -26,7 +26,7 @@ def generate_directory(dir_name, names_to_datadicts):
 
 		# Dump dictionary to json file
 		with open(file_path, 'w') as output_file:
-			json.dump(data_dict, output_file)
+			json.dump(data_dict, output_file, indent=2)
 
 def get_time_str():
 	''' Helper function to return a formatted string representing the time. '''
