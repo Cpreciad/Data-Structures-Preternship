@@ -23,6 +23,7 @@ def hard_drive_info(path=os.getcwd()):
 
 	# Initializes dictionary
 	data_dict = collections.defaultdict(dict)
+
 	for files in os.listdir(path):
 		# Sets the current full path
 		currPath = os.path.join(path,files)
@@ -39,6 +40,11 @@ def hard_drive_info(path=os.getcwd()):
 		# If entry is a directory, it will enter it recursively
 		elif (os.path.isdir(currPath)):
 			data_dict.update(hard_drive_info(currPath))
+	
+
+	# Deletes the smallest items if the dictionary gets too big
+	while (len(data_dict) > 30):
+		del data_dict[( min(data_dict.items(), key = lambda k: int(k[1])) )[0]]
 
 	return data_dict
 
