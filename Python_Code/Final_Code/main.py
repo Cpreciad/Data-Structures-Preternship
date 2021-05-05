@@ -116,6 +116,8 @@ if __name__ == "__main__":
 
 	# Obtain needed data
 	hard_drive_data = data_collector.hard_drive_info(".")
+	hard_drive_data = dict( sorted(hard_drive_data.items(), key=lambda h: int(h[1]), reverse = True) )
+
 	cpu_data = data_collector.cpu_mem_info()
 	memory_data = data_collector.memory_info()
 
