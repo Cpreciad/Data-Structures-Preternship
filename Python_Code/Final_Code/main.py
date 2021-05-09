@@ -115,11 +115,15 @@ if __name__ == "__main__":
 	args = get_args_from_user()
 
 	# Obtain needed data
-	hard_drive_data = data_collector.hard_drive_info(".")
-	hard_drive_data = dict( sorted(hard_drive_data.items(), key=lambda h: int(h[1]), reverse = True) )
+	if not args.H:
+		hard_drive_data = data_collector.hard_drive_info(".")
+		hard_drive_data = dict( sorted(hard_drive_data.items(), key=lambda h: int(h[1]), reverse = True) )
 
-	cpu_data = data_collector.cpu_mem_info()
-	memory_data = data_collector.memory_info()
+	if not args.C:
+		cpu_data = data_collector.cpu_mem_info()
+
+	if not args.M:
+		memory_data = data_collector.memory_info()
 
 	# Display data depending on flags
   # Do not print if silent flag is called
