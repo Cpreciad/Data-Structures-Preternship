@@ -31,8 +31,8 @@ def hard_drive_info(path=os.getcwd()):
 		# If entry is a file, it will stat it
 		if(os.path.isfile(currPath)):
 			request_data = os.popen(f'stat {currPath}')
-			file_data = request_data.read()
-			size = file_data.split()[3]
+			file_data = request_data.readlines()[1]
+			size = file_data.split()[1]
 
 			# adds the size to the dictionary
 			data_dict[currPath] = size
