@@ -99,7 +99,7 @@ def generate_directory(dir_name, names_to_datadicts):
 
 def get_time_str():
 	''' Helper function to return a formatted string representing the time. '''
-	dt_string = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
+	dt_string = datetime.now().strftime('%m_%d_%Y_%H_%M_%S')
 	return dt_string
 
 if __name__ == "__main__":
